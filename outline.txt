@@ -1,0 +1,12 @@
+1. Create an application that will tell me which piece of art in Redd's gallery is a fake and which one is real.
+2. Use a library like BeautifulSoup to get a table from a webpage with everything I need to know from it.
+    2a. https://www.thonky.com/animal-crossing-new-leaf/paintings-works-of-art
+3. Fill a database with information from the table
+    3a. db should have:
+        game name primary key string
+        title string
+        artist string
+        picture of art ?
+        description of how to spot fake string
+4. Be able to query the database by piece of art's name
+5. Display picture of art from db into tkinter
