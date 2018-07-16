@@ -23,6 +23,12 @@ for i, set in enumerate(no_empties):
         no_empties[i] = set[0]
 
 
+# this is taking out all the quotation marks
+for i, set in enumerate(no_empties):
+    if '"' in set[0]:
+        no_empties[i] = no_empties[i].strip('"')
+
+
 def chunk_it(l, n):
     """
     A method to chunk out the current list into smaller sublists
@@ -40,6 +46,9 @@ chunks = list(chunk_it(no_empties, 3))
 
 for chunk in chunks:
     print(chunk)
-# print(no_empties)
-# for thing in no_empties:
-#     print(thing)
+
+# now we put the chunks into a csv file
+with open("out2.csv", "w") as f:
+    wr = csv.writer(f)
+    for line in chunks:
+        wr.writerow(line)
