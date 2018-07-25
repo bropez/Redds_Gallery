@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from PIL import ImageTk, Image
+import back_end
 
 
 def divider(col, row):
@@ -13,9 +14,23 @@ def divider(col, row):
     ttk.Label(mainframe, text="-"*90).grid(column=col, row=row, columnspan=2)
 
 
-def find_art():
-    # TODO: this needs to find the art from the db by name
+def fill_desc():
+    # TODO: Make spelling not matter. Might need to redo the db
+    new_desc = back_end.get_desc(search_title.get())
+    print(new_desc[0][0])
+    desc.delete(1.0, END)
+    desc.insert(END, new_desc[0][0])
+
+
+def fill_art():
+    # TODO: might need to download all the pictures and load them in database
+    # instead of having them hosted on the webpage and ask for them
     pass
+
+
+def find_art():
+    fill_desc()
+    fill_art()
 
 
 # this creates the window of the application
