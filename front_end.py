@@ -1,3 +1,13 @@
+"""
+The front end for the redds gallery app
+divider creates a divider for visual purposes
+fill_desc fills the description from the database
+fill_art fills the artwork from the database
+fill_page calls fill_desc and fill_art to create the page
+
+written by: Matthew Lopez
+"""
+
 from tkinter import *
 from tkinter import ttk
 from PIL import ImageTk, Image
@@ -15,20 +25,33 @@ def divider(col, row):
 
 
 def fill_desc():
-    # TODO: Make spelling not matter. Might need to redo the db
-    new_desc = back_end.get_desc(search_title.get())
-    print(new_desc[0][0])
+    """
+    Querying the database to get the description and putting it out
+    :return: none
+    """
+    new_desc = back_end.get_desc(search_title.get().lower())
+    # print(new_desc[0][0])
     desc.delete(1.0, END)
     desc.insert(END, new_desc[0][0])
 
 
 def fill_art():
-    # TODO: might need to download all the pictures and load them in database
-    # instead of having them hosted on the webpage and ask for them
-    pass
+    """
+    Querying the database to get the picture and putting it out
+    :return: none
+    """
+    new_path = back_end.get_pic(search_title.get().lower())
+    # print("setup/" + new_path[0][0])
+    new_img = ImageTk.PhotoImage(Image.open("setup/" + new_path[0][0]))
+    artwork.configure(image=new_img)
+    artwork.image = new_img
 
 
-def find_art():
+def fill_page():
+    """
+    Changing the description and picture to match what you queried
+    :return: none
+    """
     fill_desc()
     fill_art()
 
@@ -46,6 +69,7 @@ mainframe.rowconfigure(0, weight=1)
 # create the header divider
 divider(0, 2)
 
+# path = "example.jpg"
 path = "example.jpg"
 
 # Create a tkinter-compatible photo image
@@ -64,7 +88,7 @@ ttk.Label(mainframe, text="Enter the art in question").grid(column=0, row=0, sti
 search_title = StringVar()
 title_entry = ttk.Entry(mainframe, textvariable=search_title)
 title_entry.grid(column=0, row=1, sticky=(W, E))
-ttk.Button(mainframe, text="Search", command=find_art).grid(column=1, row=1, sticky=W)
+ttk.Button(mainframe, text="Search", command=fill_page).grid(column=1, row=1, sticky=W)
 
 # this is now an example
 # TODO: turn this into finished product by getting from db
