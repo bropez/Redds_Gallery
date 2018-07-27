@@ -2,6 +2,7 @@
 An application to help you find out which piece of art you should buy from Redd when he comes to town.
 
 To get things running you're going to need python 3 installed. Someday I'll fix that.
+
 Steps to set up the database:
   1. Get to the setup folder
   2. Open a command window within this folder
